@@ -2,27 +2,15 @@
 
 session_start();
 
-if(!isset($_SESSION['goodPoints'])){
-    $_SESSION['goodPoints'] = 0;
-    $_SESSION['badPoints'] = 0;
-}
-
+// Router
 $template = $_GET['page']??'home';
-
 $template .= '.phtml';
-
-// $word = "Bien";
-// $word2 = "Mezziane";
 
 require 'models/main.php';
 require 'controllers/WordController.php';
+require 'controllers/UtilesController.php';
 
 $word = new Word;
-$word->ChooseRandowWord();
-$word->CheckAnswer();
-// session_destroy();
-// var_dump($list);
-
-require 'controllers/EyeController.php';
+$utiles = new Utiles;
 
 require 'views/layout.phtml';

@@ -2,6 +2,14 @@
 
 class Word {
     
+    public function __construct()
+    {
+        $this->addWord();
+        $this->ChooseRandowWord();
+        $this->CheckAnswer();
+        $this->deleteItem();
+    }
+    
     private function getList(): array
     {
         $newList = new Main;
@@ -9,6 +17,7 @@ class Word {
         return $list;
     }
     
+    //Choisi un nouveau mot si il y est autorisé
     public function ChooseRandowWord(): void
     {
         $list = $this->getList();
@@ -28,25 +37,41 @@ class Word {
         }
     }
     
-    public function CheckAnswer()
+    //Si un mot a été saisit, vérifie si la réponse est bonne
+    public function CheckAnswer(): void
     {
-        //Si on répond au formulaire
         if(isset($_POST['answer'])){
-            //On check si le réponce correspond au résultat attendu
             if($_POST['answer'] === $_SESSION['guess']){
-                //si c'est le cas, on affiche "bravo" et on génère un nouveau mot
                 echo "<p class='not'>Bravo</p>";
-                $_SESSION['goodPoints'] += 1;
                 $_SESSION['newWord'] = true;
                 $this->ChooseRandowWord();
             }
-            //si non, on affiche 'raté' et on garde le même mot
             else{
-                $_SESSION['badPoints'] += 1;
                 echo "<p class='not'>Raté!</p>";
             }
         }
-            
     }
     
+    //Ajoute un mot à la base de donné si le formulaire est rempli
+    public function addWord(): void
+    {
+        if(!empty($_POST['newWord'])&&!empty($_POST['newGuess'])){
+            $send = new Main;
+            $send->addItem();
+            echo '<p class="not">Ajouté!</p>';
+        }
+    }
+    
+    public function deleteItem(): void
+    {
+        
+        if(isset($_GET['page'])){
+            if($_GET['page'] === 'delete'){
+                // echo "<p class='not'>Delete</p>";
+                $delete = new Main;
+                $delete->deleteItem();
+                $_SESSION['newWord'] = true;
+            }
+        }
+    }
 }

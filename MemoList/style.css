@@ -25,6 +25,14 @@ form {
     justify-content: center;
 }
 
+.main {
+    font-size: 1.5rem;
+}
+
+.main input,
+.main button {
+    font-size: 1.2rem;
+}
 
 .top {
     position: absolute;
@@ -33,6 +41,7 @@ form {
     display: flex;
     justify-content: space-between;
 }
+
 
 a {
     text-decoration: none;
@@ -70,15 +79,13 @@ button {
 
 button:hover {
     transition: 0.5s;
-    /*top: -3px;
-    */
     transform: scale(1.1);
 }
 
 .not {
     position: absolute;
     top: 0px;
-    margin: 1em 45%;
+    margin: 1em 40%;
     padding: 0.5em;
     border-radius: 2em;
     background-color: white;
